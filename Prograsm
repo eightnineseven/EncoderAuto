@@ -63,8 +63,8 @@ public class EncoderAuto extends LinearOpMode {
     static final double     TURN_SPEED              = 0.2;
     static final double LIFT_UP = 5;
     static final double LIFT_DOWN = -5;
-    static final double OPEN = 0.1;
-    static final double CLOSED = -0.1;
+    static final double OPEN = 0.5;
+    static final double CLOSED = 0.5;
 
     @Override
     public void runOpMode() {
@@ -112,42 +112,50 @@ public class EncoderAuto extends LinearOpMode {
         // drop cone
         RightServo.setPower(OPEN);
         LeftServo.setPower(OPEN);
+        sleep(1);
         
         encoderDrive(TURN_SPEED, 4, -4, -4 , 1.0, LIFT_DOWN);  // turn to cones
         encoderDrive(TURN_SPEED,   0, 18.5, 18.5 , 1.0, 0);  // go to cones
        // get cone
         RightServo.setPower(CLOSED);
         LeftServo.setPower(CLOSED);
+        sleep(1);
         
         encoderDrive(TURN_SPEED,  4, -4, -4, 1.0, 0); // turn to pole
         encoderDrive(TURN_SPEED,   0, 18.5, 18.5 , 1.0, LIFT_UP);  // go to pole
         // drop cone
         RightServo.setPower(OPEN);
         LeftServo.setPower(OPEN);
+        sleep(1);
         
         encoderDrive(TURN_SPEED,  -4, 4, 4 , 1.0, 0);  // turn to cones
         encoderDrive(TURN_SPEED,   0, 18.5, 18.5 , 1.0, LIFT_DOWN);  // go to cones
         // get cone
         RightServo.setPower(CLOSED);
         LeftServo.setPower(CLOSED);
+        sleep(1);
         
         encoderDrive(TURN_SPEED,  4, -4, -4, 1.0, 0); // turn to pole
         encoderDrive(TURN_SPEED,   0, 18.5, 18.5 , 1.0, LIFT_UP);  // go to pole
         // drop cone
         RightServo.setPower(OPEN);
         LeftServo.setPower(OPEN);
+        sleep(1);
         
         encoderDrive(TURN_SPEED, -4, 4, 4 , 1.0, 0);  // turn to cones
         encoderDrive(TURN_SPEED,   0, 18.5, 18.5 , 1.0, LIFT_DOWN);  // go to cones
         // grab cone
         RightServo.setPower(CLOSED);
         LeftServo.setPower(CLOSED);
+        sleep(1);
         
         encoderDrive(TURN_SPEED,  4, -4, -4, 1.0, 0); // turn to pole
         encoderDrive(TURN_SPEED,   0, 18.5, 18.5 , 1.0, LIFT_UP);  // go to pole
         // drop cone
         RightServo.setPower(OPEN);
         LeftServo.setPower(OPEN);
+        sleep(1);
+        
         // I'll code the actual positions to go to in one of my classes. Also, the vision program I found returns the variable "position" as either 1 2 or 3z
         // if(position == 1){
         //go to pod 2
