@@ -42,6 +42,7 @@ public class EncoderAuto extends LinearOpMode {
     private DcMotor         LeftFront  = null;
     private DcMotor         RightFront = null;
     private DcMotor         RightBack = null;
+    private DcMotor         Lift = null;
 
     private ElapsedTime     runtime = new ElapsedTime();
 
@@ -58,6 +59,8 @@ public class EncoderAuto extends LinearOpMode {
                                                       (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.2;
     static final double     TURN_SPEED              = 0.2;
+    static final double LIFT_UP = 5;
+    static final double LIFT_DOWN = -5;
 
     @Override
     public void runOpMode() {
@@ -66,21 +69,24 @@ public class EncoderAuto extends LinearOpMode {
         RightBack = hardwareMap.get(DcMotor.class, "RightBack");
         LeftFront  = hardwareMap.get(DcMotor.class, "LeftFront");
         RightFront = hardwareMap.get(DcMotor.class, "RightFront");
+        Lift = hardwareMap.get(DcMotor.class, "RightFront");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // When run, this OpMode should start both motors driving forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
 
-        // leftDrive.setDirection(DcMotor.Direction.REVERSE);
-        // rightDrive.setDirection(DcMotor.Direction.FORWARD);
+         RightFront.setDirection(DcMotor.Direction.REVERSE);
+         RightBack.setDirection(DcMotor.Direction.FORWARD);
 
         LeftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         LeftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        Lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to indicate successful Encoder reset
         telemetry.addData("Starting at",  "%7d :%7d",
@@ -93,27 +99,27 @@ public class EncoderAuto extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        // speed,  LF, RB, RF, time
-        encoderDrive(DRIVE_SPEED, 0, 28, 28, 5.0);  // go to pole off start
+        // speed,  LF, RB, RF, time, lift
+        encoderDrive(DRIVE_SPEED, 0, 28, 28, 5.0, LIFT_UP);  // go to pole off start
         encoderDrive(TURN_SPEED,  -1, 1,  1, 4.0);  // turn towards pole
         // drop cone
-        encoderDrive(TURN_SPEED, 4, -4, -4 , 4.0);  // turn to cones
+        encoderDrive(TURN_SPEED, 4, -4, -4 , 4.0, LIFT_DOWN);  // turn to cones
         encoderDrive(TURN_SPEED,   0, 18.5, 18.5 , 4.0);  // go to cones
        // get cone
         encoderDrive(TURN_SPEED,  4, -4, -4, 4.0); // turn to pole
-        encoderDrive(TURN_SPEED,   0, 18.5, 18.5 , 4.0);  // go to pole
+        encoderDrive(TURN_SPEED,   0, 18.5, 18.5 , 4.0, LIFT_UP);  // go to pole
         // drop cone
         encoderDrive(TURN_SPEED,  -4, 4, 4 , 4.0);  // turn to cones
-        encoderDrive(TURN_SPEED,   0, 18.5, 18.5 , 4.0);  // go to cones
+        encoderDrive(TURN_SPEED,   0, 18.5, 18.5 , 4.0, LIFT_DOWN);  // go to cones
         // get cone
         encoderDrive(TURN_SPEED,  4, -4, -4, 4.0); // turn to pole
-        encoderDrive(TURN_SPEED,   0, 18.5, 18.5 , 4.0);  // go to pole
+        encoderDrive(TURN_SPEED,   0, 18.5, 18.5 , 4.0, LIFT_UP);  // go to pole
         // drop cone
         encoderDrive(TURN_SPEED, -4, 4, 4 , 4.0);  // turn to cones
-        encoderDrive(TURN_SPEED,   0, 18.5, 18.5 , 4.0);  // go to cones
+        encoderDrive(TURN_SPEED,   0, 18.5, 18.5 , 4.0, LIFT_DOWN);  // go to cones
         // grab cone
         encoderDrive(TURN_SPEED,  4, -4, -4, 4.0); // turn to pole
-        encoderDrive(TURN_SPEED,   0, 18.5, 18.5 , 4.0);  // go to pole
+        encoderDrive(TURN_SPEED,   0, 18.5, 18.5 , 4.0, LIFT_UP);  // go to pole
         // drop cone
         // I'll code the actual positions to go to in one of my classes. Also, the vision program I found returns the variable "position" as either 1 2 or 3z
         // if(position == 1){
