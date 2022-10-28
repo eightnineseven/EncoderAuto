@@ -82,7 +82,8 @@ public class EncoderAuto extends LinearOpMode {
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
 
          RightFront.setDirection(DcMotor.Direction.REVERSE);
-         RightBack.setDirection(DcMotor.Direction.FORWARD);
+         LeftFront.setDirection(DcMotor.Direction.REVERSE);
+         LeftBack.setDirection(DcMotor.Direction.REVERSE);
 
         LeftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
