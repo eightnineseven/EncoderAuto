@@ -118,7 +118,15 @@ public class RobotAutoDriveByEncoder_Linear extends LinearOpMode {
         encoderDrive(TURN_SPEED,   4, 4, -4, -4, 4.0); // turn to pole
         encoderDrive(TURN_SPEED,   18.5, 18.5, 18.5, 18.5 , 4.0);  // go to pole
         // drop cone
-        encoderDrive(TURN_SPEED,   -4, -4, 4, 4 , 4.0);  // turn to pole
+        // I'll code the actual positions to go to in one of my classes. Also, the vision program I found returns the variable "position" as either 1 2 or 3z
+        // if(position == 1){
+        //go to pod 2
+       // } else if(position == 2){
+       // go to pos 2
+       // } else if(position == 3){
+       // go to pos 3
+       // }
+
 
 
         telemetry.addData("Path", "Complete");
