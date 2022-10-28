@@ -122,7 +122,7 @@ public class RobotAutoDriveByEncoder_Linear extends LinearOpMode {
         // if(position == 1){
         //go to pod 2
        // } else if(position == 2){
-       // go to pos 2
+       // shouldn't actually have to move
        // } else if(position == 3){
        // go to pos 3
        // }
