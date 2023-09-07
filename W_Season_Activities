@@ -1,0 +1,59 @@
+package org.firstinspires.ftc.robotcontroller.external.samples;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+@Autonomous(name="Testing For Season Start", group="Robot")
+//@Disabled
+Public Class W_Season_Activities extends LinearOPMode {
+  private DcMotor LeftBack = null;
+  private DcMotor         LeftFront  = null;
+  private DcMotor         RightFront = null;
+  private DcMotor         RightBack = null;
+
+  Public Double RightFEC = 0;
+  Public Double LeftFEC = 0;
+  Public Double RightBEC = 0;
+  Public Double LeftBEC =0;
+
+  // Guess and Check this value
+  Static final int COUNTS_PER_TILE = 1;
+  Static final int COUNTS_PER_ROT = 1;
+
+@Override
+    public void runOpMode() {
+
+        LeftBack = hardwareMap.get(DcMotor.class, "LeftBack");
+        RightBack = hardwareMap.get(DcMotor.class, "RightBack");
+        LeftFront  = hardwareMap.get(DcMotor.class, "LeftFront");
+        RightFront = hardwareMap.get(DcMotor.class, "RightFront");
+
+  // set reversals
+
+        LeftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        LeftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        RightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        RightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+}
+public static void EncoderFB(double LF, double LB, double RF, double RB){
+      RightFEC+=RF * COUNTS_PER_TILE;
+      RightBEC+=RB * COUNTS_PER_TILE;
+      LeftFEC+=LF * COUNTS_PER_TILE;
+      LeftBEC+=LB * COUNTS_PER_TILES;
+
+      RightBack.setTargetPosition(RightFEC);
+      
+
+}
+public static void EncoderTurn(double degrees){
+  if(degrees > 0){
+    //turn left
+  } else {
+    // turn right
+  }
+}
+}
