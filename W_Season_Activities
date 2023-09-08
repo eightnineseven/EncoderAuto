@@ -81,12 +81,21 @@ public static void EncoderFB(double LF, double LB, double RF, double RB){
 public static void EncoderTurn(double degrees){
   if(degrees > 0){
     //turn left
-    RightFEC+=RF * COUNTS_PER_TILE;
-      RightBEC+=RB * COUNTS_PER_TILE;
-      LeftFEC-=LF * COUNTS_PER_TILE;
-      LeftBEC-=LB * COUNTS_PER_TILES;
+    RightFEC+=RF * COUNTS_PER_ROT;
+      RightBEC+=RB * COUNTS_PER_ROT;
+      LeftFEC-=LF * COUNTS_PER_ROT;
+      LeftBEC-=LB * COUNTS_PER_ROT;
 
-      RightBack.setTargetPosition(RightBEC);
+     
+  } else {
+    RightFEC-=RF * COUNTS_PER_ROT;
+      RightBEC-=RB * COUNTS_PER_ROT;
+      LeftFEC+=LF * COUNTS_PER_ROT;
+      LeftBEC+=LB * COUNTS_PER_ROT;
+
+      
+  }
+ RightBack.setTargetPosition(RightBEC);
       RightFront.setTargetPosition(RightFEC);
       LeftBack.setTargetPosition(LeftBEC);
       LeftFront.setTargetPosition(LeftFEC);
@@ -117,42 +126,5 @@ public static void EncoderTurn(double degrees){
       RightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
       RightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
       
-  } else {
-    RightFEC-=RF * COUNTS_PER_TILE;
-      RightBEC-=RB * COUNTS_PER_TILE;
-      LeftFEC+=LF * COUNTS_PER_TILE;
-      LeftBEC+=LB * COUNTS_PER_TILES;
-
-      RightBack.setTargetPosition(RightBEC);
-      RightFront.setTargetPosition(RightFEC);
-      LeftBack.setTargetPosition(LeftBEC);
-      LeftFront.setTargetPosition(LeftFEC);
-
-      RightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-      LeftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-      RightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-      LeftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-      LeftFront.setPower(0.3);
-      LeftBack.setPower(0.3);
-      RightFront.setPower(0.3);
-      RightBack.setPower(0.3);
-
-      while(RightBack.isBusy() && RightFront.isBusy() && LeftBack.isBusy() && LeftFront.isBusy()){
-          telemetry.addData("Currently running or something like that yk");
-          telemetry.update();
-
-      }
-
-      LeftFront.setPower(0);
-      LeftBack.setPower(0);
-      RightFront.setPower(0);
-      RightBack.setPower(0);
-
-      LeftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-      LeftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-      RightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-      RightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-  }
 }
 }
