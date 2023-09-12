@@ -12,18 +12,23 @@ final Scalar
 
 
 
-       Core.inRange(sec1MAT, new Scalar(150 , 90, 40), new Scalar(210, 150, 90), sec1MAT);
-        Core.inRange(sec2MAT, new Scalar(150, 90, 40), new Scalar(210, 150, 90), sec2MAT);
-        Core.inRange(sec3MAT, new Scalar(150, 90, 40), new Scalar(210, 150, 90), sec3MAT);
-        Core.inRange(img, new Scalar(150, 90, 40), new Scalar(210,150,90), img);
-        Scalar sec1count = Core.sumElems(sec1MAT);
-        Scalar sec2count = Core.sumElems(sec2MAT);
-        Scalar sec3count = Core.sumElems(sec3MAT);
-        Core.mean(sec1MAT);
-        Core.mean(sec2MAT);
-        Core.mean(sec3MAT);
+       //Core.inRange(sec1MAT, new Scalar(150 , 90, 40), new Scalar(210, 150, 90), sec1MAT);
+       // Core.inRange(sec2MAT, new Scalar(150, 90, 40), new Scalar(210, 150, 90), sec2MAT);
+       // Core.inRange(sec3MAT, new Scalar(150, 90, 40), new Scalar(210, 150, 90), sec3MAT);
+       // Core.inRange(img, new Scalar(150, 90, 40), new Scalar(210,150,90), img);
+      //  Scalar sec1count = Core.sumElems(sec1MAT);
+       // Scalar sec2count = Core.sumElems(sec2MAT);
+      //  Scalar sec3count = Core.sumElems(sec3MAT);
+        Scalar sec1Scalar = Core.mean(sec1MAT);
+        Scalar sec2Scalar = Core.mean(sec2MAT);
+        Scalar sec3Scalar = Core.mean(sec3MAT);
+
+
 
         Scalar green = new Scalar(0,255,0);
+        Sec1AvgDist = (sec1Scalar.val[0] + (255-sec1Scalar.val[1]) + sec1Scalar.val[2]);
+        Sec2AvgDist = (sec2Scalar.val[0] + (255-sec2Scalar.val[1]) + sec2Scalar.val[2]);
+        Sec3AvgDist = (sec3Scalar.val[0] + (255-sec3Scalar.val[1]) + sec3Scalar.val[2]);
         
 
 
@@ -56,7 +61,7 @@ final Scalar
         );
 
 
-        if(sec1count.val[0] > sec2count.val[0] && sec1count.val[0]>sec3count.val[0]){
+        if(Sec1AvgDist < Sec2AvgDist && Sec1AvgDist<Sec3AvgDist){
             System.out.println("1");
             Imgproc.rectangle(
                     img,
@@ -83,7 +88,7 @@ final Scalar
 
             );
             return img;
-        } else if(sec3count.val[0]>sec2count.val[0]){
+        } else if(Sec3AvgDist<Sec3AvgDist){
             System.out.println("2");
             Imgproc.rectangle(
                     img,
