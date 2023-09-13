@@ -6,6 +6,9 @@ final Scalar
         Rect sec2 = new Rect(300, 100, 100, 100);
         Rect sec3 = new Rect(500, 100, 100, 100);
 
+        Imgproc.cvtColor(img, img, Imgproc.COLOR_BGR2HSV);
+
+
         Mat sec1MAT = new Mat(img, sec1);
         Mat sec2MAT = new Mat(img, sec2);
         Mat sec3MAT = new Mat(img, sec3);
